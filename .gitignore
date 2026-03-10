@@ -85,3 +85,5 @@ cabritePy/*
 django_cabrite_settings.py
 
 CLAUDE.md
+
+.vscode/
