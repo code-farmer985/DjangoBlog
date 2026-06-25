@@ -72,7 +72,7 @@ class RegisterView(FormView):
                 content=content)
 
             url = reverse('accounts:result') + \
-                  '?type=register&id=' + str(user.id)
+                  '?type=register&id=' + str(user.id) + '&sign=' + sign
             return HttpResponseRedirect(url)
         else:
             return self.render_to_response({
@@ -145,6 +145,7 @@ class LoginView(FormView):
 def account_result(request):
     type = request.GET.get('type')
     id = request.GET.get('id')
+    sign = request.GET.get('sign')
 
     user = get_object_or_404(get_user_model(), id=id)
     logger.info(type)
@@ -169,7 +170,10 @@ def account_result(request):
             title = '验证成功'
         return render(request, 'account/result.html', {
             'title': title,
-            'content': content
+            'content': content,
+            'type': type,
+            'user_id': id,
+            'sign': sign
         })
     else:
         return HttpResponseRedirect('/')

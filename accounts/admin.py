@@ -37,7 +37,7 @@ class BlogUserCreationForm(forms.ModelForm):
 class BlogUserChangeForm(UserChangeForm):
     class Meta:
         model = BlogUser
-        fields = '__all__'
+        exclude = ('usable_password',)
         field_classes = {'username': UsernameField}
 
     def __init__(self, *args, **kwargs):

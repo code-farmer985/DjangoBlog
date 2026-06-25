@@ -6,14 +6,24 @@
 {% block content %}
     <div id="primary" class="site-content">
         <div id="content" role="main">
-
             <header class="archive-header">
-
-                <h2 class="archive-title"> {{ content }}</h2>
+                <h2 class="archive-title">{{ content }}</h2>
             </header><!-- .archive-header -->
+
+            {% if type == 'register' and sign %}
+                <div style="background: #f0f8ff; border: 1px solid #4a90e2; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
+                    <p style="margin: 0 0 15px 0; color: #333;">
+                        <strong>或者点击下面的链接直接激活账户：</strong>
+                    </p>
+                    <a href="{% url 'accounts:result' %}?type=validation&id={{ user_id }}&sign={{ sign }}"
+                       style="display: inline-block; background: #4a90e2; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500;">
+                        点击这里激活账户
+                    </a>
+                </div>
+            {% endif %}
+
             <br/>
             <header class="archive-header" style="text-align: center">
-
                 <a href="{% url "account:login" %}">
                     {% trans 'login' %}
                 </a>
