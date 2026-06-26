@@ -54,6 +54,7 @@ jobs:
         env:
           DJANGO_MYSQL_PASSWORD: root
           DJANGO_MYSQL_HOST: 127.0.0.1
+          DJANGO_MYSQL_DATABASE: djangoblog
         run: |
           python manage.py makemigrations
           python manage.py migrate
@@ -106,6 +107,7 @@ jobs:
         env:
           DJANGO_MYSQL_PASSWORD: root
           DJANGO_MYSQL_HOST: 127.0.0.1
+          DJANGO_MYSQL_DATABASE: djangoblog
           DJANGO_ELASTICSEARCH_HOST: 127.0.0.1:9200
         run: |
           python manage.py makemigrations

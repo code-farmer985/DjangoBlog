@@ -108,11 +108,11 @@ WSGI_APPLICATION = 'djangoblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'py-db-test',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '10.2.1.33',
-        'PORT': int(3306),
+        'NAME': os.environ.get('DJANGO_MYSQL_DATABASE') or 'py-db-test',
+        'USER': os.environ.get('DJANGO_MYSQL_USER') or 'root',
+        'PASSWORD': os.environ.get('DJANGO_MYSQL_PASSWORD') or '123456',
+        'HOST': os.environ.get('DJANGO_MYSQL_HOST') or '10.2.1.33',
+        'PORT': int(os.environ.get('DJANGO_MYSQL_PORT') or 3306),
         'OPTIONS': {
             'charset': 'utf8mb4'},
     }}
