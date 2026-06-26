@@ -35,6 +35,8 @@ class BaseModel(models.Model):
             Article) and 'update_fields' in kwargs and kwargs['update_fields'] == ['views']
         if is_update_views:
             Article.objects.filter(pk=self.pk).update(views=self.views)
+            from djangoblog.utils import cache
+            cache.clear()
         else:
             if 'slug' in self.__dict__:
                 slug = getattr(

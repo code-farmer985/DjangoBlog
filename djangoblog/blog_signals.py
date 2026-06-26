@@ -77,15 +77,14 @@ def model_post_save_callback(
     if isinstance(instance, LogEntry):
         return
     if 'get_full_url' in dir(instance):
-        is_update_views = update_fields == {'views'}
+        is_update_views = update_fields is not None and set(update_fields) == {'views'}
         if not settings.TESTING and not is_update_views:
             try:
                 notify_url = instance.get_full_url()
                 SpiderNotify.baidu_notify([notify_url])
             except Exception as ex:
                 logger.error("notify sipder", ex)
-        if not is_update_views:
-            clearcache = True
+        clearcache = True
 
     if isinstance(instance, Comment):
         if instance.is_enable:
