@@ -28,6 +28,24 @@
 
             {% for article in article_list %}
                 {% load_article_detail article True user %}
+            {% empty %}
+                <div class="empty-state">
+                    <div class="empty-state-icon">✍️</div>
+                    <h2 class="empty-state-title">这里还没有文章</h2>
+                    <p class="empty-state-desc">
+                        博客的旅程从第一个字开始，<br>
+                        等不及要看到你的第一篇作品啦～
+                    </p>
+                    {% if user.is_authenticated %}
+                        <a href="/admin/blog/article/add/" class="empty-state-btn">
+                            去写第一篇博客 →
+                        </a>
+                    {% else %}
+                        <p class="empty-state-login-hint">
+                            <a href="{% url 'account:login' %}">登录后</a>即可开始写作
+                        </p>
+                    {% endif %}
+                </div>
             {% endfor %}
             {% if is_paginated %}
                 {% load_pagination_info page_obj page_type tag_name %}
